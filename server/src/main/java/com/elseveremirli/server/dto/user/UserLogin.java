@@ -1,13 +1,15 @@
-package com.elseveremirli.server.dto;
+package com.elseveremirli.server.dto.user;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
-    private String token;
+@NoArgsConstructor
+@Builder
+public class UserLogin {
+    String username;
+    String password;
 }

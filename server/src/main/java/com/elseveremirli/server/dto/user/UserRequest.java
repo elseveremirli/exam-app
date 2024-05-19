@@ -1,4 +1,4 @@
-package com.elseveremirli.server.dto;
+package com.elseveremirli.server.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

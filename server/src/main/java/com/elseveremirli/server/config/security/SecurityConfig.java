@@ -57,7 +57,6 @@ public class SecurityConfig {
                         .authenticated()
                         .anyRequest()
                         .authenticated())
-
                 .sessionManagement(x->x
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
