@@ -27,7 +27,7 @@ public class MarkerController {
 
     @PostMapping("/login")
     public MarkerResponse login(@RequestBody MarkerLogin markerLogin) {
-        return markerService.looginMarker(markerLogin);
+        return markerService.loginMarker(markerLogin);
     }
 
 

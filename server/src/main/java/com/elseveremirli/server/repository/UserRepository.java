@@ -1,4 +1,4 @@
-package com.elseveremirli.server.dataAccess;
+package com.elseveremirli.server.repository;
 
 import com.elseveremirli.server.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

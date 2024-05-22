@@ -1,14 +1,10 @@
 package com.elseveremirli.server.service;
 
-import com.elseveremirli.server.dataAccess.MarkerRepository;
+import com.elseveremirli.server.repository.MarkerRepository;
 import com.elseveremirli.server.dto.marker.MarkerLogin;
 import com.elseveremirli.server.dto.marker.MarkerRequest;
 import com.elseveremirli.server.dto.marker.MarkerResponse;
-import com.elseveremirli.server.dto.user.UserLogin;
-import com.elseveremirli.server.dto.user.UserRequest;
-import com.elseveremirli.server.dto.user.UserResponse;
 import com.elseveremirli.server.entities.Marker;
-import com.elseveremirli.server.entities.User;
 import com.elseveremirli.server.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -53,7 +49,7 @@ public class MarkerService   {
     }
 
 
-    public MarkerResponse looginMarker(MarkerLogin markerLogin) {
+    public MarkerResponse loginMarker(MarkerLogin markerLogin) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(markerLogin.getUsername(), markerLogin.getPassword()));
         Marker marker = markerRepository.findByUsername(markerLogin .getUsername()).orElseThrow();
         String token = jwtService.generateToken(marker);

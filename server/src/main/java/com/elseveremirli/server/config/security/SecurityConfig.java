@@ -1,4 +1,5 @@
 package com.elseveremirli.server.config.security;
+import com.elseveremirli.server.enums.Role;
 import com.elseveremirli.server.service.security.UsersDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -49,12 +50,20 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(withDefaults())
                 .authorizeHttpRequests(x->x
+                        .requestMatchers("/api/admin/register")
+                        .permitAll()
+                        .requestMatchers("/api/marker/register")
+                        .hasRole(Role.ROLE_ADMIN.getValue())
                         .requestMatchers("/api/user/register")
+                        .permitAll()
+                        .requestMatchers("/api/admin/login")
+                        .permitAll()
+                        .requestMatchers("/api/marker/login")
                         .permitAll()
                         .requestMatchers("/api/user/login")
                         .permitAll()
                         .requestMatchers("/api/user/hello")
-                        .authenticated()
+                        .hasRole(Role.ROLE_USER.getValue())
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(x->x

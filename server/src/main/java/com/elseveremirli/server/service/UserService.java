@@ -1,6 +1,6 @@
 package com.elseveremirli.server.service;
 
-import com.elseveremirli.server.dataAccess.UserRepository;
+import com.elseveremirli.server.repository.UserRepository;
 import com.elseveremirli.server.dto.user.UserLogin;
 import com.elseveremirli.server.dto.user.UserRequest;
 import com.elseveremirli.server.dto.user.UserResponse;
@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 
 @Service
