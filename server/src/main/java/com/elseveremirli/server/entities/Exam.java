@@ -18,12 +18,14 @@ public class Exam {
     private int id;
     private String imgUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    private User user;
 
-    @OneToMany(mappedBy = "exam")
+    @OneToMany(mappedBy = "exam",fetch = FetchType.LAZY)
     private List<ExamResult> examResults;
 
+
+    @OneToOne(mappedBy = "exam", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private ExamAnswer examAnswer;
 
 }

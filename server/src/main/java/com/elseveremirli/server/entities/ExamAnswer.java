@@ -7,24 +7,17 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "exam_results")
+@Table(name = "exam_answers")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExamResult {
-
+public class ExamAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String answer;
 
-    private String results;
-//
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id")
-//    private User user;
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "exam_id")
+    @OneToOne
+    @JoinColumn(name = "exam_id",referencedColumnName = "id")
     private Exam exam;
 }
-

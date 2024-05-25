@@ -48,6 +48,22 @@ public class User implements UserDetails {
     private Set<Role> authorities;
 
 
-    @OneToMany(mappedBy = "user")
+    //@OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_exam_results",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "exam_result_id")
+    )
     private List<ExamResult> examResults;
+
+
+//    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//        name = "user_exam",
+//        joinColumns = @JoinColumn(name = "user_id"),
+//        inverseJoinColumns = @JoinColumn(name = "user_exam_id")
+//    )
+//    private List<Exam> exams;
 }

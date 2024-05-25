@@ -50,6 +50,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(withDefaults())
                 .authorizeHttpRequests(x->x
+                        .requestMatchers("/swagger-ui.html**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**")
+                        .permitAll()
                         .requestMatchers("/api/admin/register")
                         .permitAll()
                         .requestMatchers("/api/marker/register")
