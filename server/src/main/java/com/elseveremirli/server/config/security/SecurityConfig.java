@@ -25,7 +25,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-
     private final JwtAuthenticationFilter authFilter;
     private final UsersDetailService usersDetailService;
     private final BCryptPasswordEncoder passwordEncoderconfig;
@@ -49,7 +48,7 @@ public class SecurityConfig {
                 .httpBasic(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(withDefaults())
-                .authorizeHttpRequests(x->x
+                .authorizeHttpRequests(x -> x
                         .requestMatchers("/swagger-ui.html**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**")
                         .permitAll()
                         .requestMatchers("/api/admin/register")
@@ -64,15 +63,22 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers("/api/user/login")
                         .permitAll()
-                        .requestMatchers("/api/user/hello")
+                        .requestMatchers("/api/marker/**")
+                        .hasRole(Role.ROLE_MARKER.getValue())
+                        .requestMatchers("/api/user/**")
                         .hasRole(Role.ROLE_USER.getValue())
+                        .requestMatchers("/api/exam/save")
+                        .hasRole(Role.ROLE_ADMIN.getValue())
+                        .requestMatchers("/api/exam/**")
+                        .hasRole(Role.ROLE_USER.getValue())
+                        .requestMatchers("/**")
+                        .hasRole(Role.ROLE_ADMIN.getValue()) // Admin users can access any endpoint
                         .anyRequest()
                         .authenticated())
-                .sessionManagement(x->x
+                .sessionManagement(x -> x
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
-
 }
